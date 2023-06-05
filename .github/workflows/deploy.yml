@@ -23,5 +23,6 @@ jobs:
         application_name: piStateServer
         environment_name: PiStateServer-env
         version_label: 1
+        use_existing_version_if_available: true
         region: us-west-2
         deployment_package: deploy.zip
