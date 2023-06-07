@@ -4,6 +4,7 @@ const express = require('express');
 const capitalize = require('./capitalize/capitalize');
 const getState=require('./readState/readState')
 const { updateState }=require('./updateState/updateState');
+const postPlantStatus = require('./postPlantStatus/postPlantStatus')
 
 const serverErr = require('./error/500')
 const cors = require('cors');
@@ -12,6 +13,7 @@ const app = express();
 
 app.use(cors());
 app.use(serverErr)
+app.use(express.json())
 
 // what parameters are defined in express functions ??
 app.get('/capitalize-me', function(request, response, next) {
@@ -43,6 +45,19 @@ app.post('/state', async function(request, response, next) {
     next(e)
   }
 });
+
+app.post('/status', async function (request, response, next) {
+  try {
+    let newPlant = request.body;
+    console.log('NEW PLANT TO BE POSTED' , newPlant)
+    const postedPlant = await postPlantStatus(newPlant);
+    console.log('POSTED', postedPlant);
+    response.send(postedPlant)
+  }
+  catch(e) {
+    next(e)
+  }
+})
 
 
 
