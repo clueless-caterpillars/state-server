@@ -5,6 +5,7 @@ const capitalize = require('./capitalize/capitalize');
 const getState=require('./readState/readState')
 const { updateState }=require('./updateState/updateState');
 const postPlantStatus = require('./postPlantStatus/postPlantStatus')
+const getPlants = require('./getPlants/getPlants')
 
 const serverErr = require('./error/500')
 const cors = require('cors');
@@ -40,11 +41,30 @@ app.post('/state', async function(request, response, next) {
     }
     response.send(updated);
   }
-  
   catch(e) {
     next(e)
   }
 });
+
+app.get('/status/day', async function (request, response, next) {
+  console.log(request.query)
+  try{
+    const plantStatusResult = await getPlants('/day', request.query);
+    response.send(plantStatusResult)
+  }catch(e){
+    // console.error(e)
+  }
+})
+
+app.get('/status', async function (request, response, next) {
+  console.log(request.query)
+  try{
+    const plantStatusResult = await getPlants();
+    response.send(plantStatusResult)
+  }catch(e){
+    console.error(e)
+  }
+})
 
 app.post('/status', async function (request, response, next) {
   try {
