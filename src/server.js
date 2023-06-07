@@ -3,7 +3,8 @@
 const express = require('express');
 const capitalize = require('./capitalize/capitalize');
 const getState=require('./readState/readState')
-const { updateState }=require('./updateState/updateState');
+// const { updateState }=require('./updateState/updateState');
+const  togglePiState = require('./togglePiState/togglePiState')
 const postPlantStatus = require('./postPlantStatus/postPlantStatus')
 const getPlants = require('./getPlants/getPlants')
 
@@ -34,12 +35,16 @@ app.get('/state', async function(request, response, next) {
 });
 
 app.post('/state', async function(request, response, next) {
+  console.log(request.query)
   try {
-    let updated = await updateState('off')
-    if (request.query.state){
-      updated = await updateState(request.query.state)
+    if (request.query.state === 'on'){
+      // updated = await updateStateSQS(request.query.state)
+      await togglePiState(request.query.state);
+      response.send('SUCCESS!');
     }
-    response.send(updated);
+    else {
+      response.send('YOUR PI IS', request.query.state)
+    }
   }
   catch(e) {
     next(e)
