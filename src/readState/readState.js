@@ -6,14 +6,16 @@ const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 async function getState (){
 
   const creds = await get_creds();
-  const client = new S3Client({
+  const user = {
     region: "us-west-2",
     credentials: {
       accessKeyId: creds[0],
       secretAccessKey: creds[1],
       sessionToken: creds[2]
     }
-})
+}
+    
+  const client = new S3Client(user)
 
   const input = { 
     Bucket: 'pi-state', 
