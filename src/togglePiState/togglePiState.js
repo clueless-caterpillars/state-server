@@ -1,6 +1,7 @@
 'use strict';
 
 const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 
 async function togglePiState(state='off') {
   
@@ -14,14 +15,16 @@ async function togglePiState(state='off') {
   const AWS_PISTATE_SNS = 'arn:aws:sns:us-west-2:919132472542:PiStatus.fifo';
   // const AWS_TOGGLEPISTATE_SQS = 'https://sqs.us-west-2.amazonaws.com/919132472542/TogglePiState.fifo';
   
+  let id = uuidv4();
   const piState ={
-    state: state
+    state: state,
+    id: id
   };
   
   //send message to pickup SNS
   const payload = {
     Message: JSON.stringify(piState),
-    MessageGroupId: 'piState',
+    MessageGroupId: id,
     TopicArn: AWS_PISTATE_SNS
   }
   
