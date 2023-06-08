@@ -38,6 +38,9 @@ app.post('/state', async function(request, response, next) {
   console.log(request.query)
   try {
     if (request.query.state === 'on'|| request.query.state === 'off'){
+      if (request.query.time) {
+        
+      }
       let updated = await updateState(request.query.state)
       await togglePiState(request.query.state);
       response.send(updated);
