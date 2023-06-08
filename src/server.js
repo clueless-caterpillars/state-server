@@ -36,13 +36,12 @@ app.get('/state', async function(request, response, next) {
 
 app.post('/state', async function(request, response, next) {
   console.log(request.query)
+  let time = null;
   try {
+    if (request.query.time) {time = request.query.time}
     if (request.query.state === 'on'|| request.query.state === 'off'){
-      if (request.query.time) {
-        
-      }
       let updated = await updateState(request.query.state)
-      await togglePiState(request.query.state);
+      await togglePiState(request.query.state, request.query.time);
       response.send(updated);
     }
     else {
