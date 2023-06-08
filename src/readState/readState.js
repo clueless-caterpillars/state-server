@@ -1,11 +1,12 @@
 'use strict';
 
-const get_creds = require('../getCreds/getCreds')
+const getCreds = require('../getCreds/getCreds')
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 async function getState (){
 
-  const creds = await get_creds();
+
+  const creds = await getCreds();
   const user = {
     region: "us-west-2",
     credentials: {
@@ -16,11 +17,13 @@ async function getState (){
 }
     
   const client = new S3Client(user)
+  
+  // const client = new S3Client()
+
 
   const input = { 
     Bucket: 'pi-state', 
     Key: 'state.json' 
-  
   };
   const response = await client.send(new GetObjectCommand(input));
   let stateData = await response.Body.transformToString();

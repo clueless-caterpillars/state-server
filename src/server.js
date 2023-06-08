@@ -14,10 +14,10 @@ const cors = require('cors');
 const app = express(); 
 
 app.use(cors());
-app.use(serverErr)
 app.use(express.json())
 
-// what parameters are defined in express functions ??
+// The only AWS-non-dependent route... 
+// This is the tester route to make sure the server is up
 app.get('/capitalize-me', function(request, response, next) {
   // I want to send a message as a query parameter??
   if (request.query.message) {
@@ -54,12 +54,13 @@ app.post('/state', async function(request, response, next) {
 });
 
 app.get('/status/day', async function (request, response, next) {
-  console.log(request.query)
+  console.log('YOUR REQUEST QUERY:', request.query)
   try{
     const plantStatusResult = await getPlants('/day', request.query);
     response.send(plantStatusResult)
   }catch(e){
-    // console.error(e)
+    console.error(e)
+    next(e)
   }
 })
 
@@ -70,6 +71,7 @@ app.get('/status', async function (request, response, next) {
     response.send(plantStatusResult)
   }catch(e){
     console.error(e)
+    next(e)
   }
 })
 
@@ -86,6 +88,7 @@ app.post('/status', async function (request, response, next) {
   }
 })
 
+app.use(serverErr)
 
 
 module.exports = app;
