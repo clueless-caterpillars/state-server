@@ -3,7 +3,7 @@
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 
-async function togglePiState(state='off') {
+async function togglePiState(state='off', time=null) {
   
   const AWS_REGION = 'us-west-2';
   AWS.config.update({ region: AWS_REGION});
@@ -18,6 +18,7 @@ async function togglePiState(state='off') {
   let id = uuidv4();
   const piState ={
     state: state,
+    time: time,
     id: id
   };
   
