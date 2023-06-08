@@ -5,7 +5,7 @@
   "main": "capitilize.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest"
+    "test": "jest --verbose --coverage"
   },
   "keywords": [],
   "author": "",
