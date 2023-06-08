@@ -8,6 +8,8 @@ const  togglePiState = require('./togglePiState/togglePiState')
 const postPlantStatus = require('./postPlantStatus/postPlantStatus')
 const getPlants = require('./getPlants/getPlants')
 
+const bearerAuth = require('./auth/bearer');
+
 const serverErr = require('./error/500')
 const cors = require('cors');
 
@@ -34,7 +36,7 @@ app.get('/state', async function(request, response, next) {
   response.send(currentState);
 });
 
-app.post('/state', async function(request, response, next) {
+app.post('/state', bearerAuth, async function(request, response, next) {
   console.log(request.query)
   let time = null;
   try {
