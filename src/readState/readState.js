@@ -5,7 +5,7 @@ const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 async function getState (){
 
-/*
+
   const creds = await getCreds();
   const user = {
     region: "us-west-2",
@@ -15,11 +15,11 @@ async function getState (){
       sessionToken: creds[2]
     }
 }
-*/
+
     
-  // const client = new S3Client(user);
+  const client = new S3Client(user);
   
-  const client = new S3Client()
+  // const client = new S3Client()
 
 
   const input = { 
