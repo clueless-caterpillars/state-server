@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a middleware server that interfaces between the Plant Pal mobile app, the Raspberry Pi, and our AWS services.
+ExpressJS server on AWS EC2, utilizing S3 for temporary data storage. Employed Cognito for authentication purposes. Managed data storage using DynamoDB and established an API gateway to enable CRUD operations on the database. Orchestrated communication between the mobile app and a Raspberry Pi device through SNS and SQS.
 
 ## Installation
 
