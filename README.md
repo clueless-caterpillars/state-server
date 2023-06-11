@@ -10,6 +10,10 @@ ExpressJS server on AWS EC2, utilizing S3 for temporary data storage. Employed C
 
 ## Installation
 
-This server can be installed on an EC2 instance or other platforms such as Render. Adjustments may need to be made in the code in order to fit routes and configs to your planned architecture.
+[Deployed server](http://ec2-18-236-102-112.us-west-2.compute.amazonaws.com:3001)
 
-If running locally, install dependencies with npm install and use npm start to run the server.
+To run your own server locally, clone this repository and run `npm install` to install the dependencies. Delete the `getCreds` files and comment out all the lines requiring the function. Then run `npm start` to start the server.
+
+To deploy your server on EC2 or Render, follow the platform documentation for deloyment. Adjustments may need to be made in the code in order to fit routes and configs to your planned architecture.
+
+*note: the getCreds function was written to automatically get the token from EC2 to start the server, feel free to use that for your own AWS account with proper permissions*
