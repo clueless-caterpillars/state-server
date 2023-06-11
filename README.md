@@ -6,7 +6,7 @@ ExpressJS server on AWS EC2, utilizing S3 for temporary data storage. Employed C
 
 ## Code flow
 
-![Drag Racing](Dragster.jpg)
+![server code flow](https://github.com/clueless-caterpillars/state-server/blob/main/state%20codeflow.png)
 
 ## Installation
 
